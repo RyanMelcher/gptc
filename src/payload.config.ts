@@ -13,6 +13,7 @@ import { Plays } from './collections/Plays'
 import { Productions } from './collections/Productions'
 import { Events } from './collections/Events'
 import { News } from './collections/News'
+import { Subscribers } from './collections/Subscribers'
 import { Site } from './globals/Site'
 import { Homepage } from './globals/Homepage'
 
@@ -25,7 +26,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { title: 'GPTC Plays Admin' },
   },
-  collections: [Users, Media, Pages, Artists, Plays, Productions, Events, News],
+  collections: [Users, Media, Pages, Artists, Plays, Productions, Events, News, Subscribers],
   globals: [Site, Homepage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
