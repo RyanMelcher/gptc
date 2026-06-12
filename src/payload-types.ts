@@ -70,6 +70,11 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    artists: Artist;
+    plays: Play;
+    productions: Production;
+    events: Event;
+    news: News;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +85,11 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    artists: ArtistsSelect<false> | ArtistsSelect<true>;
+    plays: PlaysSelect<false> | PlaysSelect<true>;
+    productions: ProductionsSelect<false> | ProductionsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -268,6 +278,199 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "artists".
+ */
+export interface Artist {
+  id: number;
+  name: string;
+  slug: string;
+  roles?: ('playwright' | 'director' | 'actor' | 'staff')[] | null;
+  bio?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  headshot?: (number | null) | Media;
+  links?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  featured?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plays".
+ */
+export interface Play {
+  id: number;
+  title: string;
+  slug: string;
+  playwright: number | Artist;
+  synopsis?: string | null;
+  themes?:
+    | {
+        value?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  lifecycle: 'in_development' | 'produced' | 'published';
+  media?:
+    | {
+        asset: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productions".
+ */
+export interface Production {
+  id: number;
+  title: string;
+  slug: string;
+  play: number | Play;
+  /**
+   * e.g. "2026 Festival"
+   */
+  season?: string | null;
+  year?: number | null;
+  venue?: string | null;
+  director?: (number | null) | Artist;
+  cast?: (number | Artist)[] | null;
+  startsOn?: string | null;
+  endsOn?: string | null;
+  photos?:
+    | {
+        asset: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  program?: (number | null) | Media;
+  ticketURL?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  slug: string;
+  type: 'reading' | 'workshop' | 'festival' | 'fundraiser' | 'other';
+  startsAt: string;
+  endsAt?: string | null;
+  venue?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  ticketURL?: string | null;
+  hero?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt?: string | null;
+  hero?: (number | null) | Media;
+  publishedAt?: string | null;
+  tags?:
+    | {
+        value?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  blocks?:
+    | (
+        | {
+            eyebrow?: string | null;
+            headline: string;
+            subhead?: string | null;
+            background?: ('marigold' | 'bolt' | 'leaf' | 'magenta' | 'paper') | null;
+            cta?: {
+              label?: string | null;
+              href?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            headline: string;
+            body?: string | null;
+            color?: ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink') | null;
+            align?: ('left' | 'center') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'color';
+          }
+        | {
+            content: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richText';
+          }
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -301,6 +504,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'artists';
+        value: number | Artist;
+      } | null)
+    | ({
+        relationTo: 'plays';
+        value: number | Play;
+      } | null)
+    | ({
+        relationTo: 'productions';
+        value: number | Production;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'news';
+        value: number | News;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -481,6 +704,154 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "artists_select".
+ */
+export interface ArtistsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  roles?: T;
+  bio?: T;
+  headshot?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  featured?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plays_select".
+ */
+export interface PlaysSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  playwright?: T;
+  synopsis?: T;
+  themes?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  lifecycle?: T;
+  media?:
+    | T
+    | {
+        asset?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productions_select".
+ */
+export interface ProductionsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  play?: T;
+  season?: T;
+  year?: T;
+  venue?: T;
+  director?: T;
+  cast?: T;
+  startsOn?: T;
+  endsOn?: T;
+  photos?:
+    | T
+    | {
+        asset?: T;
+        id?: T;
+      };
+  program?: T;
+  ticketURL?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  type?: T;
+  startsAt?: T;
+  endsAt?: T;
+  venue?: T;
+  description?: T;
+  ticketURL?: T;
+  hero?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  hero?: T;
+  publishedAt?: T;
+  tags?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  blocks?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              eyebrow?: T;
+              headline?: T;
+              subhead?: T;
+              background?: T;
+              cta?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        color?:
+          | T
+          | {
+              headline?: T;
+              body?: T;
+              color?: T;
+              align?: T;
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

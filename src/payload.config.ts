@@ -8,6 +8,11 @@ import { fileURLToPath } from 'node:url'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
+import { Artists } from './collections/Artists'
+import { Plays } from './collections/Plays'
+import { Productions } from './collections/Productions'
+import { Events } from './collections/Events'
+import { News } from './collections/News'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -18,7 +23,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { title: 'GPTC Plays Admin' },
   },
-  collections: [Users, Media, Pages],
+  collections: [Users, Media, Pages, Artists, Plays, Productions, Events, News],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
