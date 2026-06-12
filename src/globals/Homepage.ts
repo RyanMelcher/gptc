@@ -1,8 +1,12 @@
 import type { GlobalConfig } from 'payload'
+import { revalidate } from '../lib/revalidate'
 
 export const Homepage: GlobalConfig = {
   slug: 'homepage',
   access: { read: () => true },
+  hooks: {
+    afterChange: [() => revalidate(['/'])],
+  },
   fields: [
     {
       name: 'hero',

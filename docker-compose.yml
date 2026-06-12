@@ -1,0 +1,56 @@
+services:
+  app:
+    build: .
+    image: gptcplays:latest
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URI: postgres://gptc:${POSTGRES_PASSWORD}@db:5432/gptc
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - media:/app/media
+    networks:
+      - traefik
+      - internal
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik
+      - traefik.http.routers.gptcplays.rule=Host(`gptcplays.com`) || Host(`www.gptcplays.com`)
+      - traefik.http.routers.gptcplays.entrypoints=websecure
+      - traefik.http.routers.gptcplays.tls=true
+      - traefik.http.routers.gptcplays.tls.certresolver=letsencrypt
+      - traefik.http.services.gptcplays.loadbalancer.server.port=3000
+      # www -> apex redirect
+      - traefik.http.middlewares.gptcplays-www.redirectregex.regex=^https?://www\.gptcplays\.com/(.*)
+      - traefik.http.middlewares.gptcplays-www.redirectregex.replacement=https://gptcplays.com/$$1
+      - traefik.http.middlewares.gptcplays-www.redirectregex.permanent=true
+      - traefik.http.routers.gptcplays.middlewares=gptcplays-www
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: gptc
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: gptc
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "gptc"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:
+  media:
+
+networks:
+  traefik:
+    external: true
+  internal:

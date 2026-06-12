@@ -1,14 +1,25 @@
 import type { CollectionConfig } from 'payload'
+import { revalidate, detailPaths } from '../lib/revalidate'
 
 export const Plays: CollectionConfig = {
   slug: 'plays',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'playwright', 'lifecycle', 'updatedAt'],
+    preview: (doc) => {
+      const base = process.env.NEXT_PUBLIC_SERVER_URL || ''
+      const secret = process.env.PREVIEW_SECRET || ''
+      const slug = typeof doc.slug === 'string' ? doc.slug : ''
+      return `${base}/api/preview?secret=${secret}&path=/plays/${encodeURIComponent(slug)}`
+    },
   },
   versions: {
     drafts: { autosave: { interval: 800 } },
     maxPerDoc: 25,
+  },
+  hooks: {
+    afterChange: [({ doc, previousDoc }) => revalidate(detailPaths('/plays', doc, previousDoc))],
+    afterDelete: [({ doc }) => revalidate(detailPaths('/plays', doc))],
   },
   access: {
     read: ({ req: { user } }) => {

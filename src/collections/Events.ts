@@ -1,10 +1,15 @@
 import type { CollectionConfig } from 'payload'
+import { revalidate, detailPaths } from '../lib/revalidate'
 
 export const Events: CollectionConfig = {
   slug: 'events',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'type', 'startsAt', 'updatedAt'],
+  },
+  hooks: {
+    afterChange: [({ doc, previousDoc }) => revalidate(detailPaths('/events', doc, previousDoc))],
+    afterDelete: [({ doc }) => revalidate(detailPaths('/events', doc))],
   },
   access: {
     read: () => true,

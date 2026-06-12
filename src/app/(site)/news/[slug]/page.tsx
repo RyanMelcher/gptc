@@ -2,14 +2,18 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { payload } from '@/lib/payload'
 import { BlockRenderer } from '@/components/render/BlockRenderer'
+import { isDraft } from '@/lib/preview'
 
 async function getNews(slug: string) {
   const p = await payload()
+  const draft = await isDraft()
   const { docs } = await p.find({
     collection: 'news',
     where: { slug: { equals: slug } },
     limit: 1,
     depth: 1,
+    draft,
+    overrideAccess: draft,
   })
   return docs[0] ?? null
 }

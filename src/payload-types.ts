@@ -274,6 +274,67 @@ export interface Page {
             blockName?: string | null;
             blockType: 'richText';
           }
+        | {
+            headline?: string | null;
+            left: {
+              heading: string;
+              body?: string | null;
+              image?: (number | null) | Media;
+              href?: string | null;
+            };
+            right: {
+              heading: string;
+              body?: string | null;
+              image?: (number | null) | Media;
+              href?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'twoUp';
+          }
+        | {
+            asset: number | Media;
+            caption?: string | null;
+            size?: ('inset' | 'wide' | 'full') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'media';
+          }
+        | {
+            headline: string;
+            body?: string | null;
+            tone?: ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink') | null;
+            cta: {
+              label: string;
+              href: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+        | {
+            quote: string;
+            attribution?: string | null;
+            /**
+             * e.g. publication or play title.
+             */
+            source?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'quote';
+          }
+        | {
+            kind: 'youtube' | 'vimeo' | 'iframe';
+            /**
+             * YouTube/Vimeo URL or any iframe-safe URL.
+             */
+            url: string;
+            aspect?: ('16x9' | '4x3' | '1x1') | null;
+            caption?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'embed';
+          }
       )[]
     | null;
   seo?: {
@@ -470,6 +531,67 @@ export interface News {
             id?: string | null;
             blockName?: string | null;
             blockType: 'richText';
+          }
+        | {
+            headline?: string | null;
+            left: {
+              heading: string;
+              body?: string | null;
+              image?: (number | null) | Media;
+              href?: string | null;
+            };
+            right: {
+              heading: string;
+              body?: string | null;
+              image?: (number | null) | Media;
+              href?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'twoUp';
+          }
+        | {
+            asset: number | Media;
+            caption?: string | null;
+            size?: ('inset' | 'wide' | 'full') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'media';
+          }
+        | {
+            headline: string;
+            body?: string | null;
+            tone?: ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink') | null;
+            cta: {
+              label: string;
+              href: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+        | {
+            quote: string;
+            attribution?: string | null;
+            /**
+             * e.g. publication or play title.
+             */
+            source?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'quote';
+          }
+        | {
+            kind: 'youtube' | 'vimeo' | 'iframe';
+            /**
+             * YouTube/Vimeo URL or any iframe-safe URL.
+             */
+            url: string;
+            aspect?: ('16x9' | '4x3' | '1x1') | null;
+            caption?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'embed';
           }
       )[]
     | null;
@@ -724,6 +846,72 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        twoUp?:
+          | T
+          | {
+              headline?: T;
+              left?:
+                | T
+                | {
+                    heading?: T;
+                    body?: T;
+                    image?: T;
+                    href?: T;
+                  };
+              right?:
+                | T
+                | {
+                    heading?: T;
+                    body?: T;
+                    image?: T;
+                    href?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        media?:
+          | T
+          | {
+              asset?: T;
+              caption?: T;
+              size?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              headline?: T;
+              body?: T;
+              tone?: T;
+              cta?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        quote?:
+          | T
+          | {
+              quote?: T;
+              attribution?: T;
+              source?: T;
+              id?: T;
+              blockName?: T;
+            };
+        embed?:
+          | T
+          | {
+              kind?: T;
+              url?: T;
+              aspect?: T;
+              caption?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   seo?:
     | T
@@ -875,6 +1063,72 @@ export interface NewsSelect<T extends boolean = true> {
           | T
           | {
               content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        twoUp?:
+          | T
+          | {
+              headline?: T;
+              left?:
+                | T
+                | {
+                    heading?: T;
+                    body?: T;
+                    image?: T;
+                    href?: T;
+                  };
+              right?:
+                | T
+                | {
+                    heading?: T;
+                    body?: T;
+                    image?: T;
+                    href?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        media?:
+          | T
+          | {
+              asset?: T;
+              caption?: T;
+              size?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              headline?: T;
+              body?: T;
+              tone?: T;
+              cta?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        quote?:
+          | T
+          | {
+              quote?: T;
+              attribution?: T;
+              source?: T;
+              id?: T;
+              blockName?: T;
+            };
+        embed?:
+          | T
+          | {
+              kind?: T;
+              url?: T;
+              aspect?: T;
+              caption?: T;
               id?: T;
               blockName?: T;
             };

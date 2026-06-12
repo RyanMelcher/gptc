@@ -1,3 +1,8 @@
 export { HeroBlock } from './HeroBlock'
 export { ColorBlock } from './ColorBlock'
 export { RichTextBlock } from './RichTextBlock'
+export { TwoUpBlock } from './TwoUpBlock'
+export { MediaBlock } from './MediaBlock'
+export { CTABlock } from './CTABlock'
+export { QuoteBlock } from './QuoteBlock'
+export { EmbedBlock } from './EmbedBlock'

@@ -1,10 +1,15 @@
 import type { CollectionConfig } from 'payload'
+import { revalidate, detailPaths } from '../lib/revalidate'
 
 export const Artists: CollectionConfig = {
   slug: 'artists',
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'roles', 'featured', 'updatedAt'],
+  },
+  hooks: {
+    afterChange: [({ doc, previousDoc }) => revalidate(detailPaths('/artists', doc, previousDoc))],
+    afterDelete: [({ doc }) => revalidate(detailPaths('/artists', doc))],
   },
   access: {
     read: () => true,

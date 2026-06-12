@@ -1,8 +1,12 @@
 import type { GlobalConfig } from 'payload'
+import { revalidate } from '../lib/revalidate'
 
 export const Site: GlobalConfig = {
   slug: 'site',
   access: { read: () => true },
+  hooks: {
+    afterChange: [() => revalidate(['/'])],
+  },
   fields: [
     {
       type: 'tabs',

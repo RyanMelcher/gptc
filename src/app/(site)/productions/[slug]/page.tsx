@@ -2,14 +2,18 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { payload } from '@/lib/payload'
 import { BrutalButton } from '@/components/brutal/BrutalButton'
+import { isDraft } from '@/lib/preview'
 
 async function getProduction(slug: string) {
   const p = await payload()
+  const draft = await isDraft()
   const { docs } = await p.find({
     collection: 'productions',
     where: { slug: { equals: slug } },
     limit: 1,
     depth: 2,
+    draft,
+    overrideAccess: draft,
   })
   return docs[0] ?? null
 }
