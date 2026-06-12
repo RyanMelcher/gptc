@@ -1,8 +1,17 @@
-import { FlatCompat } from '@eslint/eslintrc'
+import nextCoreWebVitals from 'eslint-config-next/core-web-vitals'
+import nextTypescript from 'eslint-config-next/typescript'
 
-const compat = new FlatCompat({ baseDirectory: import.meta.dirname })
-
-export default [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
-  { ignores: ['.next/**', 'node_modules/**', 'src/payload-types.ts', 'src/app/(payload)/admin/importMap.js'] },
+const config = [
+  ...nextCoreWebVitals,
+  ...nextTypescript,
+  {
+    ignores: [
+      '.next/**',
+      'node_modules/**',
+      'src/payload-types.ts',
+      'src/app/(payload)/admin/importMap.js',
+    ],
+  },
 ]
+
+export default config
