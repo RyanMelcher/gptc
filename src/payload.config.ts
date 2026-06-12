@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Pages } from './collections/Pages'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -17,7 +18,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { title: 'GPTC Plays Admin' },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Pages],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
