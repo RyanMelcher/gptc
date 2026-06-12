@@ -1,0 +1,19 @@
+@theme {
+  --color-ink: #0a0a0a;
+  --color-paper: #fffaf3;
+
+  --color-bolt: #635bff;
+  --color-leaf: #00d4a0;
+  --color-marigold: #ffb84d;
+  --color-magenta: #ff4da6;
+  --color-cobalt: #1d4ed8;
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --shadow-brutal: 4px 4px 0 var(--color-ink);
+  --shadow-brutal-lg: 8px 8px 0 var(--color-ink);
+
+  --radius-brutal: 0px;
+  --border-brutal: 3px;
+}

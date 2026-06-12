@@ -1,0 +1,4 @@
+Payload + Next.js context for Claude:
+Build Payload 3 + Next.js 16 (App Router, TypeScript) monorepo for https://gptcplays.com (Great Plains Theatre Commons). Mission: strengthen community by supporting diverse new stories/plays by writers.
+Design language (critical): 2026 neo-brutalist / colorful blocky style — spunky, sleek, fun, inviting/non-corporate. Heavy use of bold colored blocks/sections from provided stripe palette (blues, greens, yellows, purples). Chunky typography, asymmetric layouts, playful but clean. Add Framer Motion micro-animations and dynamic block transitions. Tailwind + shadcn/ui.
+Structure: Block-based Pages collection + Plays/Productions, Events, News, Artists, Media. Non-tech friendly admin. Custom vibrant frontend. Start from official Payload template, theme aggressively to match examples (Gumroad, RetroUI neo-brutalist). Make maintainable and fun.
