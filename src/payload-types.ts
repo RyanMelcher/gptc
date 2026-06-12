@@ -99,8 +99,14 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    site: Site;
+    homepage: Homepage;
+  };
+  globalsSelect: {
+    site: SiteSelect<false> | SiteSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -896,6 +902,223 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site".
+ */
+export interface Site {
+  id: number;
+  logoText?: string | null;
+  navLinks?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Small status bar above the nav (e.g. "Festival 2026 — May 24").
+   */
+  statusPills?:
+    | {
+        label: string;
+        tone?: ('ink' | 'bolt' | 'leaf' | 'marigold' | 'magenta') | null;
+        id?: string | null;
+      }[]
+    | null;
+  whatsOn?:
+    | {
+        /**
+         * e.g. "Now Playing", "Upcoming"
+         */
+        eyebrow?: string | null;
+        title: string;
+        body?: string | null;
+        image?: (number | null) | Media;
+        href: string;
+        tone?: ('paper' | 'marigold' | 'leaf' | 'bolt' | 'magenta') | null;
+        id?: string | null;
+      }[]
+    | null;
+  footerColumns?:
+    | {
+        heading: string;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  socials?:
+    | {
+        platform: 'facebook' | 'instagram' | 'twitter' | 'youtube' | 'tiktok';
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  tagline?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: number;
+  hero: {
+    eyebrow?: string | null;
+    headline: string;
+    subhead?: string | null;
+    /**
+     * Looping background video (mp4 or webm). Muted, autoplay.
+     */
+    video?: (number | null) | Media;
+    /**
+     * Fallback image while video loads or if video missing.
+     */
+    poster?: (number | null) | Media;
+    primaryCta?: {
+      label?: string | null;
+      href?: string | null;
+    };
+    secondaryCta?: {
+      label?: string | null;
+      href?: string | null;
+    };
+  };
+  featuredPlay?: {
+    eyebrow?: string | null;
+    play?: (number | null) | Play;
+    image?: (number | null) | Media;
+  };
+  /**
+   * Full-bleed color block (e.g. festival announcement).
+   */
+  callout?: {
+    eyebrow?: string | null;
+    headline?: string | null;
+    body?: string | null;
+    tone?: ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink') | null;
+    cta?: {
+      label?: string | null;
+      href?: string | null;
+    };
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site_select".
+ */
+export interface SiteSelect<T extends boolean = true> {
+  logoText?: T;
+  navLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  statusPills?:
+    | T
+    | {
+        label?: T;
+        tone?: T;
+        id?: T;
+      };
+  whatsOn?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        body?: T;
+        image?: T;
+        href?: T;
+        tone?: T;
+        id?: T;
+      };
+  footerColumns?:
+    | T
+    | {
+        heading?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socials?:
+    | T
+    | {
+        platform?: T;
+        href?: T;
+        id?: T;
+      };
+  tagline?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        headline?: T;
+        subhead?: T;
+        video?: T;
+        poster?: T;
+        primaryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+        secondaryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+      };
+  featuredPlay?:
+    | T
+    | {
+        eyebrow?: T;
+        play?: T;
+        image?: T;
+      };
+  callout?:
+    | T
+    | {
+        eyebrow?: T;
+        headline?: T;
+        body?: T;
+        tone?: T;
+        cta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -13,6 +13,8 @@ import { Plays } from './collections/Plays'
 import { Productions } from './collections/Productions'
 import { Events } from './collections/Events'
 import { News } from './collections/News'
+import { Site } from './globals/Site'
+import { Homepage } from './globals/Homepage'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -24,6 +26,7 @@ export default buildConfig({
     meta: { title: 'GPTC Plays Admin' },
   },
   collections: [Users, Media, Pages, Artists, Plays, Productions, Events, News],
+  globals: [Site, Homepage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

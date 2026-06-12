@@ -12,7 +12,7 @@ export const Media: CollectionConfig = {
   },
   upload: {
     staticDir: path.resolve(process.cwd(), 'media'),
-    mimeTypes: ['image/*', 'application/pdf'],
+    mimeTypes: ['image/*', 'video/mp4', 'video/webm', 'application/pdf'],
     imageSizes: [
       { name: 'thumb', width: 400, height: 400, position: 'centre' },
       { name: 'card', width: 800 },

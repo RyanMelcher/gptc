@@ -1,6 +1,10 @@
 import './globals.css'
 import { Space_Grotesk, Inter } from 'next/font/google'
 import type { Metadata } from 'next'
+import { StatusBar } from '@/components/site/StatusBar'
+import { SiteNav } from '@/components/site/SiteNav'
+import { SiteFooter } from '@/components/site/SiteFooter'
+import { getSite } from '@/lib/site'
 
 const display = Space_Grotesk({ subsets: ['latin'], variable: '--font-display' })
 const body = Inter({ subsets: ['latin'], variable: '--font-body' })
@@ -10,10 +14,21 @@ export const metadata: Metadata = {
   description: 'New plays. New voices. Great Plains.',
 }
 
-export default function SiteLayout({ children }: { children: React.ReactNode }) {
+export default async function SiteLayout({ children }: { children: React.ReactNode }) {
+  const site = await getSite()
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
-      <body>{children}</body>
+      <body>
+        <StatusBar pills={site.statusPills} />
+        <SiteNav logoText={site.logoText} links={site.navLinks} />
+        {children}
+        <SiteFooter
+          columns={site.footerColumns}
+          socials={site.socials}
+          tagline={site.tagline}
+          logoText={site.logoText}
+        />
+      </body>
     </html>
   )
 }
