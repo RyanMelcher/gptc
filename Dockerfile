@@ -34,6 +34,18 @@ COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 COPY --chown=nextjs:nodejs docker-entrypoint.sh ./docker-entrypoint.sh
 RUN chmod +x ./docker-entrypoint.sh && mkdir -p ./media && chown nextjs:nodejs ./media
 
+# Next.js standalone tracing drops sharp's libvips native lib (@img/sharp-libvips-*)
+# on linux/musl, so the binding fails to dlopen at runtime. Install a complete
+# sharp for this platform in isolation and place it in node_modules, replacing
+# the partial pnpm-linked copy so resolution is flat and self-contained.
+RUN rm -rf node_modules/sharp node_modules/@img \
+ && mkdir -p /tmp/sharp-install && cd /tmp/sharp-install \
+ && npm init -y >/dev/null 2>&1 \
+ && npm install --no-audit --no-fund --include=optional sharp@0.35.1 \
+ && cp -R /tmp/sharp-install/node_modules/. /app/node_modules/ \
+ && chown -R nextjs:nodejs /app/node_modules/sharp /app/node_modules/@img /app/node_modules/detect-libc \
+ && rm -rf /tmp/sharp-install
+
 USER nextjs
 EXPOSE 3000
 

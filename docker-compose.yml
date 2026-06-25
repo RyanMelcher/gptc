@@ -13,15 +13,15 @@ services:
     volumes:
       - media:/app/media
     networks:
-      - traefik
+      - web
       - internal
     labels:
       - traefik.enable=true
-      - traefik.docker.network=traefik
+      - traefik.docker.network=web
       - traefik.http.routers.gptc.rule=Host(`${APP_DOMAIN:?set APP_DOMAIN in .env}`) || Host(`www.${APP_DOMAIN}`)
       - traefik.http.routers.gptc.entrypoints=websecure
       - traefik.http.routers.gptc.tls=true
-      - traefik.http.routers.gptc.tls.certresolver=letsencrypt
+      - traefik.http.routers.gptc.tls.certresolver=myresolver
       - traefik.http.services.gptc.loadbalancer.server.port=3000
       # www -> apex redirect
       - traefik.http.middlewares.gptc-www.redirectregex.regex=^https?://www\.${APP_DOMAIN}/(.*)
@@ -51,6 +51,6 @@ volumes:
   media:
 
 networks:
-  traefik:
+  web:
     external: true
   internal:
