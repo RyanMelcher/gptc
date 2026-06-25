@@ -25,7 +25,7 @@ export function VideoHero({
   const pSrc = mediaUrl(poster, 'hero')
 
   return (
-    <section className="relative h-[88vh] min-h-[560px] w-full overflow-hidden border-b-[3px] border-[var(--color-ink)]">
+    <section className="relative h-[80vh] min-h-[480px] md:h-[88vh] md:min-h-[560px] w-full overflow-hidden border-b-[3px] border-[var(--color-ink)]">
       {vSrc ? (
         <video
           className="absolute inset-0 w-full h-full object-cover"
@@ -50,17 +50,17 @@ export function VideoHero({
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
 
       <div className="relative z-10 flex h-full items-end">
-        <div className="mx-auto w-full max-w-7xl px-6 pb-16 md:pb-24 text-[var(--color-paper)]">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 pb-10 md:pb-24 text-[var(--color-paper)]">
           {eyebrow && (
             <p className="font-display uppercase tracking-widest text-sm mb-4 inline-block border-[2px] border-[var(--color-paper)] px-3 py-1">
               {eyebrow}
             </p>
           )}
-          <h1 className="font-display font-black text-5xl md:text-7xl lg:text-8xl leading-[0.92] max-w-5xl">
+          <h1 className="font-display font-black text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[0.92] max-w-5xl">
             {headline}
           </h1>
           {subhead && (
-            <p className="mt-6 text-lg md:text-2xl max-w-2xl">{subhead}</p>
+            <p className="mt-4 md:mt-6 text-base sm:text-lg md:text-2xl lg:whitespace-nowrap">{subhead}</p>
           )}
           <div className="mt-8 flex flex-wrap gap-4">
             {primaryCta?.label && primaryCta?.href && (

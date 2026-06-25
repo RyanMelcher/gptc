@@ -236,7 +236,9 @@ export interface Page {
             eyebrow?: string | null;
             headline: string;
             subhead?: string | null;
-            background?: ('marigold' | 'bolt' | 'leaf' | 'magenta' | 'paper') | null;
+            background?:
+              | ('marigold' | 'bolt' | 'leaf' | 'magenta' | 'paper' | 'sage' | 'mint' | 'sky' | 'periwinkle' | 'butter')
+              | null;
             cta?: {
               label?: string | null;
               href?: string | null;
@@ -248,7 +250,9 @@ export interface Page {
         | {
             headline: string;
             body?: string | null;
-            color?: ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink') | null;
+            color?:
+              | ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink' | 'sage' | 'mint' | 'sky' | 'periwinkle' | 'butter')
+              | null;
             align?: ('left' | 'center') | null;
             id?: string | null;
             blockName?: string | null;
@@ -303,7 +307,9 @@ export interface Page {
         | {
             headline: string;
             body?: string | null;
-            tone?: ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink') | null;
+            tone?:
+              | ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink' | 'sage' | 'mint' | 'sky' | 'periwinkle' | 'butter')
+              | null;
             cta: {
               label: string;
               href: string;
@@ -494,7 +500,9 @@ export interface News {
             eyebrow?: string | null;
             headline: string;
             subhead?: string | null;
-            background?: ('marigold' | 'bolt' | 'leaf' | 'magenta' | 'paper') | null;
+            background?:
+              | ('marigold' | 'bolt' | 'leaf' | 'magenta' | 'paper' | 'sage' | 'mint' | 'sky' | 'periwinkle' | 'butter')
+              | null;
             cta?: {
               label?: string | null;
               href?: string | null;
@@ -506,7 +514,9 @@ export interface News {
         | {
             headline: string;
             body?: string | null;
-            color?: ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink') | null;
+            color?:
+              | ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink' | 'sage' | 'mint' | 'sky' | 'periwinkle' | 'butter')
+              | null;
             align?: ('left' | 'center') | null;
             id?: string | null;
             blockName?: string | null;
@@ -561,7 +571,9 @@ export interface News {
         | {
             headline: string;
             body?: string | null;
-            tone?: ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink') | null;
+            tone?:
+              | ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink' | 'sage' | 'mint' | 'sky' | 'periwinkle' | 'butter')
+              | null;
             cta: {
               label: string;
               href: string;
@@ -1210,7 +1222,9 @@ export interface Site {
   statusPills?:
     | {
         label: string;
-        tone?: ('ink' | 'bolt' | 'leaf' | 'marigold' | 'magenta') | null;
+        tone?:
+          | ('ink' | 'bolt' | 'leaf' | 'marigold' | 'magenta' | 'sage' | 'mint' | 'sky' | 'periwinkle' | 'butter')
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -1224,10 +1238,31 @@ export interface Site {
         body?: string | null;
         image?: (number | null) | Media;
         href: string;
-        tone?: ('paper' | 'marigold' | 'leaf' | 'bolt' | 'magenta') | null;
+        tone?:
+          | ('paper' | 'marigold' | 'leaf' | 'bolt' | 'magenta' | 'sage' | 'mint' | 'sky' | 'periwinkle' | 'butter')
+          | null;
         id?: string | null;
       }[]
     | null;
+  sponsors?: {
+    heading?: string | null;
+    subheading?: string | null;
+    items?:
+      | {
+          name: string;
+          /**
+           * Optional logo. If absent, the name renders as text.
+           */
+          logo?: (number | null) | Media;
+          /**
+           * Optional link.
+           */
+          href?: string | null;
+          tier?: ('lead' | 'sponsor' | 'individual') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
   footerColumns?:
     | {
         heading: string;
@@ -1279,6 +1314,18 @@ export interface Homepage {
       href?: string | null;
     };
   };
+  /**
+   * Card highlighting the next show. Pulls title, date, venue, ticket link from the linked event.
+   */
+  upcomingShow?: {
+    eyebrow?: string | null;
+    event?: (number | null) | Event;
+    /**
+     * Poster image. Falls back to the event hero if empty.
+     */
+    poster?: (number | null) | Media;
+    ctaLabel?: string | null;
+  };
   featuredPlay?: {
     eyebrow?: string | null;
     play?: (number | null) | Play;
@@ -1291,7 +1338,9 @@ export interface Homepage {
     eyebrow?: string | null;
     headline?: string | null;
     body?: string | null;
-    tone?: ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink') | null;
+    tone?:
+      | ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink' | 'sage' | 'mint' | 'sky' | 'periwinkle' | 'butter')
+      | null;
     cta?: {
       label?: string | null;
       href?: string | null;
@@ -1330,6 +1379,21 @@ export interface SiteSelect<T extends boolean = true> {
         href?: T;
         tone?: T;
         id?: T;
+      };
+  sponsors?:
+    | T
+    | {
+        heading?: T;
+        subheading?: T;
+        items?:
+          | T
+          | {
+              name?: T;
+              logo?: T;
+              href?: T;
+              tier?: T;
+              id?: T;
+            };
       };
   footerColumns?:
     | T
@@ -1381,6 +1445,14 @@ export interface HomepageSelect<T extends boolean = true> {
               label?: T;
               href?: T;
             };
+      };
+  upcomingShow?:
+    | T
+    | {
+        eyebrow?: T;
+        event?: T;
+        poster?: T;
+        ctaLabel?: T;
       };
   featuredPlay?:
     | T

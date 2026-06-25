@@ -41,7 +41,7 @@ export default async function PlayDetail({
     typeof play.playwright === 'object' && play.playwright ? play.playwright.name : null
 
   return (
-    <main className="mx-auto max-w-4xl p-8 space-y-6">
+    <main className="mx-auto max-w-4xl px-4 py-6 sm:p-8 space-y-6">
       <h1 className="text-5xl md:text-7xl font-black">{play.title}</h1>
       {author && (
         <p className="text-xl uppercase tracking-wider">By {author}</p>

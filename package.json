@@ -23,7 +23,11 @@
     "generate:importmap": "payload generate:importmap",
     "seed": "payload run src/scripts/seed.ts",
     "db:up": "docker compose -f docker-compose.dev.yml up -d db",
-    "db:down": "docker compose -f docker-compose.dev.yml down"
+    "db:down": "docker compose -f docker-compose.dev.yml down",
+    "db:dump": "mkdir -p backups && docker compose -f docker-compose.dev.yml exec -T db pg_dump -U gptc -d gptc --clean --if-exists --no-owner --no-privileges > backups/gptc-$(date +%Y%m%d-%H%M%S).sql",
+    "db:dump:data": "mkdir -p backups && docker compose -f docker-compose.dev.yml exec -T db pg_dump -U gptc -d gptc --data-only --disable-triggers --no-owner > backups/gptc-data-$(date +%Y%m%d-%H%M%S).sql",
+    "db:restore": "test -n \"$FILE\" || (echo 'usage: FILE=backups/foo.sql pnpm db:restore' && exit 1) && docker compose -f docker-compose.dev.yml exec -T db psql -U gptc -d gptc -v ON_ERROR_STOP=1 < $FILE",
+    "media:sync:prod": "test -n \"$HOST\" || (echo 'usage: HOST=user@server PROD_PATH=/srv/gtpcplays pnpm media:sync:prod' && exit 1) && rsync -avz --progress ./media/ $HOST:$PROD_PATH/media-import/"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.85.1",

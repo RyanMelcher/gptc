@@ -35,7 +35,7 @@ export default async function ArtistDetail({
   if (!artist) notFound()
 
   return (
-    <main className="mx-auto max-w-4xl p-8 space-y-6">
+    <main className="mx-auto max-w-4xl px-4 py-6 sm:p-8 space-y-6">
       <h1 className="text-5xl md:text-7xl font-black">{artist.name}</h1>
       {artist.roles && artist.roles.length > 0 && (
         <p className="text-xl uppercase tracking-wider">{artist.roles.join(' · ')}</p>

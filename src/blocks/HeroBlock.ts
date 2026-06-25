@@ -13,10 +13,15 @@ export const HeroBlock: Block = {
       defaultValue: 'marigold',
       options: [
         { label: 'Marigold', value: 'marigold' },
-        { label: 'Bolt', value: 'bolt' },
-        { label: 'Leaf', value: 'leaf' },
+        { label: 'Bolt (Teal)', value: 'bolt' },
+        { label: 'Leaf (Olive)', value: 'leaf' },
         { label: 'Magenta', value: 'magenta' },
         { label: 'Paper', value: 'paper' },
+        { label: 'Sage', value: 'sage' },
+        { label: 'Mint', value: 'mint' },
+        { label: 'Sky', value: 'sky' },
+        { label: 'Periwinkle', value: 'periwinkle' },
+        { label: 'Butter', value: 'butter' },
       ],
     },
     {

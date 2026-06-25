@@ -1,7 +1,7 @@
 services:
   app:
-    build: .
-    image: gptcplays:latest
+    image: ${APP_IMAGE:?set APP_IMAGE in .env, e.g. ghcr.io/<owner>/gtcp:latest}
+    pull_policy: always
     restart: unless-stopped
     env_file: .env
     environment:

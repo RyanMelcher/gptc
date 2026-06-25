@@ -2,11 +2,17 @@
   --color-ink: #0a0a0a;
   --color-paper: #fffaf3;
 
-  --color-bolt: #635bff;
-  --color-leaf: #00d4a0;
-  --color-marigold: #ffb84d;
+  --color-bolt: #14a3a3;
+  --color-leaf: #6b8d3a;
+  --color-marigold: #efce3a;
   --color-magenta: #ff4da6;
   --color-cobalt: #1d4ed8;
+
+  --color-sage: #a8c98b;
+  --color-mint: #c5e3ca;
+  --color-sky: #b6d2e6;
+  --color-periwinkle: #8e9dc4;
+  --color-butter: #efe89e;
 
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;

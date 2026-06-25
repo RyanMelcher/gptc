@@ -1,14 +1,29 @@
 import * as React from 'react'
 import { cn } from '@/lib/cn'
 
-type Variant = 'bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink'
+type Variant =
+  | 'bolt'
+  | 'leaf'
+  | 'marigold'
+  | 'magenta'
+  | 'ink'
+  | 'sage'
+  | 'mint'
+  | 'sky'
+  | 'periwinkle'
+  | 'butter'
 
 const palette: Record<Variant, string> = {
   bolt: 'bg-[var(--color-bolt)] text-[var(--color-paper)]',
-  leaf: 'bg-[var(--color-leaf)] text-[var(--color-ink)]',
+  leaf: 'bg-[var(--color-leaf)] text-[var(--color-paper)]',
   marigold: 'bg-[var(--color-marigold)] text-[var(--color-ink)]',
   magenta: 'bg-[var(--color-magenta)] text-[var(--color-paper)]',
   ink: 'bg-[var(--color-ink)] text-[var(--color-paper)]',
+  sage: 'bg-[var(--color-sage)] text-[var(--color-ink)]',
+  mint: 'bg-[var(--color-mint)] text-[var(--color-ink)]',
+  sky: 'bg-[var(--color-sky)] text-[var(--color-ink)]',
+  periwinkle: 'bg-[var(--color-periwinkle)] text-[var(--color-ink)]',
+  butter: 'bg-[var(--color-butter)] text-[var(--color-ink)]',
 }
 
 export const BrutalButton = React.forwardRef<

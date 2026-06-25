@@ -1,7 +1,17 @@
 import { Block as BrutalBlock } from '@/components/brutal/Block'
 import { cn } from '@/lib/cn'
 
-type Color = 'bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink'
+type Color =
+  | 'bolt'
+  | 'leaf'
+  | 'marigold'
+  | 'magenta'
+  | 'ink'
+  | 'sage'
+  | 'mint'
+  | 'sky'
+  | 'periwinkle'
+  | 'butter'
 
 export type ColorProps = {
   headline: string
@@ -12,10 +22,15 @@ export type ColorProps = {
 
 const palette: Record<Color, string> = {
   bolt: 'bg-[var(--color-bolt)] text-[var(--color-paper)]',
-  leaf: 'bg-[var(--color-leaf)] text-[var(--color-ink)]',
+  leaf: 'bg-[var(--color-leaf)] text-[var(--color-paper)]',
   marigold: 'bg-[var(--color-marigold)] text-[var(--color-ink)]',
   magenta: 'bg-[var(--color-magenta)] text-[var(--color-paper)]',
   ink: 'bg-[var(--color-ink)] text-[var(--color-paper)]',
+  sage: 'bg-[var(--color-sage)] text-[var(--color-ink)]',
+  mint: 'bg-[var(--color-mint)] text-[var(--color-ink)]',
+  sky: 'bg-[var(--color-sky)] text-[var(--color-ink)]',
+  periwinkle: 'bg-[var(--color-periwinkle)] text-[var(--color-ink)]',
+  butter: 'bg-[var(--color-butter)] text-[var(--color-ink)]',
 }
 
 export function ColorRender({ headline, body, color = 'bolt', align = 'left' }: ColorProps) {

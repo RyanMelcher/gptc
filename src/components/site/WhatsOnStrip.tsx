@@ -4,14 +4,29 @@ import { cn } from '@/lib/cn'
 import { mediaUrl, mediaAlt } from '@/lib/media'
 import type { Media } from '@/payload-types'
 
-type Tone = 'paper' | 'marigold' | 'leaf' | 'bolt' | 'magenta'
+type Tone =
+  | 'paper'
+  | 'marigold'
+  | 'leaf'
+  | 'bolt'
+  | 'magenta'
+  | 'sage'
+  | 'mint'
+  | 'sky'
+  | 'periwinkle'
+  | 'butter'
 
 const toneBg: Record<Tone, string> = {
   paper: 'bg-[var(--color-paper)]',
   marigold: 'bg-[var(--color-marigold)]',
-  leaf: 'bg-[var(--color-leaf)]',
+  leaf: 'bg-[var(--color-leaf)] text-[var(--color-paper)]',
   bolt: 'bg-[var(--color-bolt)] text-[var(--color-paper)]',
   magenta: 'bg-[var(--color-magenta)] text-[var(--color-paper)]',
+  sage: 'bg-[var(--color-sage)]',
+  mint: 'bg-[var(--color-mint)]',
+  sky: 'bg-[var(--color-sky)]',
+  periwinkle: 'bg-[var(--color-periwinkle)]',
+  butter: 'bg-[var(--color-butter)]',
 }
 
 export type WhatsOnCard = {
@@ -27,9 +42,9 @@ export type WhatsOnCard = {
 export function WhatsOnStrip({ cards }: { cards?: WhatsOnCard[] | null }) {
   if (!cards?.length) return null
   return (
-    <section className="bg-[var(--color-paper)] border-b-[3px] border-[var(--color-ink)] py-16">
-      <div className="mx-auto max-w-7xl px-6 space-y-8">
-        <h2 className="font-display text-4xl md:text-5xl font-black">What&rsquo;s On</h2>
+    <section className="bg-[var(--color-paper)] border-b-[3px] border-[var(--color-ink)] py-10 md:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-6 md:space-y-8">
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black">What&rsquo;s On</h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {cards.map((c, i) => {
             const img = mediaUrl(c.image, 'card')

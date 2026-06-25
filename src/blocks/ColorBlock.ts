@@ -11,11 +11,16 @@ export const ColorBlock: Block = {
       type: 'select',
       defaultValue: 'bolt',
       options: [
-        { label: 'Bolt', value: 'bolt' },
-        { label: 'Leaf', value: 'leaf' },
+        { label: 'Bolt (Teal)', value: 'bolt' },
+        { label: 'Leaf (Olive)', value: 'leaf' },
         { label: 'Marigold', value: 'marigold' },
         { label: 'Magenta', value: 'magenta' },
         { label: 'Ink', value: 'ink' },
+        { label: 'Sage', value: 'sage' },
+        { label: 'Mint', value: 'mint' },
+        { label: 'Sky', value: 'sky' },
+        { label: 'Periwinkle', value: 'periwinkle' },
+        { label: 'Butter', value: 'butter' },
       ],
     },
     {

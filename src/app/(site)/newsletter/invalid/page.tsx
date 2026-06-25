@@ -4,7 +4,7 @@ export const metadata = { title: 'Invalid Confirmation Link' }
 
 export default function InvalidPage() {
   return (
-    <main className="mx-auto max-w-3xl p-8">
+    <main className="mx-auto max-w-3xl px-4 py-6 sm:p-8">
       <Block className="bg-[var(--color-marigold)]">
         <h1 className="text-5xl font-black">Link expired.</h1>
         <p className="mt-4 text-lg">

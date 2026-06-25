@@ -36,7 +36,7 @@ export default async function EventDetail({
   if (!evt) notFound()
 
   return (
-    <main className="mx-auto max-w-4xl p-8 space-y-6">
+    <main className="mx-auto max-w-4xl px-4 py-6 sm:p-8 space-y-6">
       <p className="text-sm uppercase tracking-wider">{evt.type}</p>
       <h1 className="text-5xl md:text-7xl font-black">{evt.title}</h1>
       <p className="text-lg">

@@ -2,7 +2,17 @@ import { Block as BrutalBlock } from '@/components/brutal/Block'
 import { BrutalButton } from '@/components/brutal/BrutalButton'
 import { cn } from '@/lib/cn'
 
-type Bg = 'marigold' | 'bolt' | 'leaf' | 'magenta' | 'paper'
+type Bg =
+  | 'marigold'
+  | 'bolt'
+  | 'leaf'
+  | 'magenta'
+  | 'paper'
+  | 'sage'
+  | 'mint'
+  | 'sky'
+  | 'periwinkle'
+  | 'butter'
 
 export type HeroProps = {
   eyebrow?: string | null
@@ -15,9 +25,14 @@ export type HeroProps = {
 const bgClass: Record<Bg, string> = {
   marigold: 'bg-[var(--color-marigold)]',
   bolt: 'bg-[var(--color-bolt)] text-[var(--color-paper)]',
-  leaf: 'bg-[var(--color-leaf)]',
+  leaf: 'bg-[var(--color-leaf)] text-[var(--color-paper)]',
   magenta: 'bg-[var(--color-magenta)] text-[var(--color-paper)]',
   paper: 'bg-[var(--color-paper)]',
+  sage: 'bg-[var(--color-sage)]',
+  mint: 'bg-[var(--color-mint)]',
+  sky: 'bg-[var(--color-sky)]',
+  periwinkle: 'bg-[var(--color-periwinkle)]',
+  butter: 'bg-[var(--color-butter)]',
 }
 
 export function HeroRender({ eyebrow, headline, subhead, background = 'marigold', cta }: HeroProps) {

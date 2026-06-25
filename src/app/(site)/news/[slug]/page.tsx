@@ -42,7 +42,7 @@ export default async function NewsDetail({
   if (!item) notFound()
 
   return (
-    <main className="mx-auto max-w-4xl p-8 space-y-6">
+    <main className="mx-auto max-w-4xl px-4 py-6 sm:p-8 space-y-6">
       {item.publishedAt && (
         <p className="text-sm uppercase tracking-wider">
           {new Date(item.publishedAt).toLocaleDateString()}

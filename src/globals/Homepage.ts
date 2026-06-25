@@ -46,6 +46,22 @@ export const Homepage: GlobalConfig = {
       ],
     },
     {
+      name: 'upcomingShow',
+      type: 'group',
+      admin: { description: 'Card highlighting the next show. Pulls title, date, venue, ticket link from the linked event.' },
+      fields: [
+        { name: 'eyebrow', type: 'text', defaultValue: 'Upcoming Show' },
+        { name: 'event', type: 'relationship', relationTo: 'events' },
+        {
+          name: 'poster',
+          type: 'upload',
+          relationTo: 'media',
+          admin: { description: 'Poster image. Falls back to the event hero if empty.' },
+        },
+        { name: 'ctaLabel', type: 'text', defaultValue: 'Get Tickets' },
+      ],
+    },
+    {
       name: 'featuredPlay',
       type: 'group',
       fields: [
@@ -67,11 +83,16 @@ export const Homepage: GlobalConfig = {
           type: 'select',
           defaultValue: 'magenta',
           options: [
-            { label: 'Bolt', value: 'bolt' },
-            { label: 'Leaf', value: 'leaf' },
+            { label: 'Bolt (Teal)', value: 'bolt' },
+            { label: 'Leaf (Olive)', value: 'leaf' },
             { label: 'Marigold', value: 'marigold' },
             { label: 'Magenta', value: 'magenta' },
             { label: 'Ink', value: 'ink' },
+            { label: 'Sage', value: 'sage' },
+            { label: 'Mint', value: 'mint' },
+            { label: 'Sky', value: 'sky' },
+            { label: 'Periwinkle', value: 'periwinkle' },
+            { label: 'Butter', value: 'butter' },
           ],
         },
         {

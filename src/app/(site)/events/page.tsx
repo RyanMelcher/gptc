@@ -26,7 +26,7 @@ export default async function EventsIndex({
   })
 
   return (
-    <main className="mx-auto max-w-6xl p-8 space-y-8">
+    <main className="mx-auto max-w-6xl px-4 py-6 sm:p-8 space-y-8">
       <h1 className="text-5xl md:text-7xl font-black">EVENTS</h1>
       <nav className="flex gap-4">
         <Link

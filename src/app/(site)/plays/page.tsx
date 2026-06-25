@@ -14,7 +14,7 @@ export default async function PlaysIndex() {
   })
 
   return (
-    <main className="mx-auto max-w-6xl p-8 space-y-8">
+    <main className="mx-auto max-w-6xl px-4 py-6 sm:p-8 space-y-8">
       <h1 className="text-5xl md:text-7xl font-black">PLAYS</h1>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {docs.map((play) => {

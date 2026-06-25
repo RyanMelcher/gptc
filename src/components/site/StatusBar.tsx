@@ -1,13 +1,28 @@
 import { cn } from '@/lib/cn'
 
-type Tone = 'ink' | 'bolt' | 'leaf' | 'marigold' | 'magenta'
+type Tone =
+  | 'ink'
+  | 'bolt'
+  | 'leaf'
+  | 'marigold'
+  | 'magenta'
+  | 'sage'
+  | 'mint'
+  | 'sky'
+  | 'periwinkle'
+  | 'butter'
 
 const toneClass: Record<Tone, string> = {
   ink: 'bg-[var(--color-ink)] text-[var(--color-paper)]',
   bolt: 'bg-[var(--color-bolt)] text-[var(--color-paper)]',
-  leaf: 'bg-[var(--color-leaf)] text-[var(--color-ink)]',
+  leaf: 'bg-[var(--color-leaf)] text-[var(--color-paper)]',
   marigold: 'bg-[var(--color-marigold)] text-[var(--color-ink)]',
   magenta: 'bg-[var(--color-magenta)] text-[var(--color-paper)]',
+  sage: 'bg-[var(--color-sage)] text-[var(--color-ink)]',
+  mint: 'bg-[var(--color-mint)] text-[var(--color-ink)]',
+  sky: 'bg-[var(--color-sky)] text-[var(--color-ink)]',
+  periwinkle: 'bg-[var(--color-periwinkle)] text-[var(--color-ink)]',
+  butter: 'bg-[var(--color-butter)] text-[var(--color-ink)]',
 }
 
 type Pill = { id?: string | null; label: string; tone?: Tone | null }

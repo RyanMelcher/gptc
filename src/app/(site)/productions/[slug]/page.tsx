@@ -44,7 +44,7 @@ export default async function ProductionDetail({
     typeof prod.play === 'object' && prod.play ? prod.play.title : null
 
   return (
-    <main className="mx-auto max-w-4xl p-8 space-y-6">
+    <main className="mx-auto max-w-4xl px-4 py-6 sm:p-8 space-y-6">
       <h1 className="text-5xl md:text-7xl font-black">{prod.title}</h1>
       {playTitle && (
         <p className="text-xl uppercase tracking-wider">From the play &ldquo;{playTitle}&rdquo;</p>

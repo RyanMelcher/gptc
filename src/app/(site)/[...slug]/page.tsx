@@ -44,7 +44,7 @@ export default async function DynamicPage({
   if (!page) notFound()
 
   return (
-    <main className="mx-auto max-w-6xl p-8">
+    <main className="mx-auto max-w-6xl px-4 py-6 sm:p-8">
       <BlockRenderer blocks={page.blocks} />
     </main>
   )

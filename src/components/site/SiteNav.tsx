@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { MobileMenu } from './MobileMenu'
 
 type NavLink = { id?: string | null; label: string; href: string }
 
@@ -32,6 +33,7 @@ export function SiteNav({
             ))}
           </ul>
         </nav>
+        <MobileMenu links={links} />
       </div>
     </header>
   )
