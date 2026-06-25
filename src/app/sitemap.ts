@@ -1,6 +1,9 @@
 import type { MetadataRoute } from 'next'
 import { payload } from '@/lib/payload'
 
+// Queries the DB; must run at request time, not at build (build has no database).
+export const dynamic = 'force-dynamic'
+
 const STATIC_PATHS = ['', '/plays', '/productions', '/events', '/news', '/artists']
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

@@ -1,5 +1,8 @@
 import { payload } from '@/lib/payload'
 
+// Queries the DB; must run at request time, not at build (build has no database).
+export const dynamic = 'force-dynamic'
+
 function esc(s: string): string {
   return s
     .replace(/&/g, '&amp;')
