@@ -1,16 +1,21 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 
 type NavLink = { id?: string | null; label: string; href: string }
 
+const emptySubscribe = () => () => {}
+
 export function MobileMenu({ links }: { links?: NavLink[] | null }) {
   const [open, setOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => setMounted(true), [])
+  // false during SSR + first render, true after hydration — gates the portal
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  )
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''

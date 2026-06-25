@@ -9,6 +9,7 @@ const config = [
       '.next/**',
       'node_modules/**',
       'src/payload-types.ts',
+      'src/migrations/**',
       'src/app/(payload)/admin/importMap.js',
     ],
   },

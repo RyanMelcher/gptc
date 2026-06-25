@@ -1,6 +1,6 @@
 services:
   app:
-    image: ${APP_IMAGE:?set APP_IMAGE in .env, e.g. ghcr.io/<owner>/gtcp:latest}
+    image: ${APP_IMAGE:?set APP_IMAGE in .env, e.g. ghcr.io/<owner>/gptc:latest}
     pull_policy: always
     restart: unless-stopped
     env_file: .env
@@ -18,16 +18,16 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=traefik
-      - traefik.http.routers.gptcplays.rule=Host(`gptcplays.com`) || Host(`www.gptcplays.com`)
-      - traefik.http.routers.gptcplays.entrypoints=websecure
-      - traefik.http.routers.gptcplays.tls=true
-      - traefik.http.routers.gptcplays.tls.certresolver=letsencrypt
-      - traefik.http.services.gptcplays.loadbalancer.server.port=3000
+      - traefik.http.routers.gptc.rule=Host(`${APP_DOMAIN:?set APP_DOMAIN in .env}`) || Host(`www.${APP_DOMAIN}`)
+      - traefik.http.routers.gptc.entrypoints=websecure
+      - traefik.http.routers.gptc.tls=true
+      - traefik.http.routers.gptc.tls.certresolver=letsencrypt
+      - traefik.http.services.gptc.loadbalancer.server.port=3000
       # www -> apex redirect
-      - traefik.http.middlewares.gptcplays-www.redirectregex.regex=^https?://www\.gptcplays\.com/(.*)
-      - traefik.http.middlewares.gptcplays-www.redirectregex.replacement=https://gptcplays.com/$$1
-      - traefik.http.middlewares.gptcplays-www.redirectregex.permanent=true
-      - traefik.http.routers.gptcplays.middlewares=gptcplays-www
+      - traefik.http.middlewares.gptc-www.redirectregex.regex=^https?://www\.${APP_DOMAIN}/(.*)
+      - traefik.http.middlewares.gptc-www.redirectregex.replacement=https://${APP_DOMAIN}/$$1
+      - traefik.http.middlewares.gptc-www.redirectregex.permanent=true
+      - traefik.http.routers.gptc.middlewares=gptc-www
 
   db:
     image: postgres:16-alpine

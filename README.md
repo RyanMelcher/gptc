@@ -10,7 +10,7 @@ Great Plains Theatre Commons site. Payload 3 + Next.js 16.
 - Visit `/admin/create-first-user` to seed an admin account.
 
 ## Production deploy
-CI builds and pushes the app image to GHCR (`ghcr.io/<owner>/gtcp`) on every
+CI builds and pushes the app image to GHCR (`ghcr.io/<owner>/gptc`) on every
 push to `main`. The server pulls that image — it never builds.
 
 Requires Docker on the host plus an existing Traefik instance with an
@@ -30,13 +30,17 @@ Subsequent deploys (after CI publishes a new image):
 docker compose pull && docker compose up -d
 ```
 
-Traefik routes `gptcplays.com` (and `www.gptcplays.com` → apex) to the app
+Traefik routes `${APP_DOMAIN}` (and `www.${APP_DOMAIN}` → apex) to the app
 container's `:3000`. Postgres + media live on named volumes (`pgdata`, `media`).
 Payload migrations under `src/migrations/` run automatically on container start.
 
+Switching domains is a one-line change: set `APP_DOMAIN` in `.env` (no scheme, no
+`www`) and re-run `docker compose up -d`. Keep `NEXT_PUBLIC_SERVER_URL` in sync.
+
 Set these in `.env` before bringing the stack up:
-`APP_IMAGE=ghcr.io/<owner>/gtcp:latest`, `POSTGRES_PASSWORD`, `PAYLOAD_SECRET`,
-`NEXT_PUBLIC_SERVER_URL=https://gptcplays.com`, `RESEND_API_KEY`, `EMAIL_FROM`.
+`APP_IMAGE=ghcr.io/<owner>/gptc:latest`, `APP_DOMAIN` (e.g. `greatplainstheatrecommons.org`),
+`POSTGRES_PASSWORD`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SERVER_URL=https://<APP_DOMAIN>`,
+`RESEND_API_KEY`, `EMAIL_FROM`.
 
 The GHCR package defaults to private. Either make it public in the repo's package
 settings, or create a read-only PAT (`read:packages`) and `docker login` on the host
