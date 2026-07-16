@@ -1,4 +1,5 @@
-import { Block as BrutalBlock } from '@/components/brutal/Block'
+import { PaperPanel } from '@/components/paper/PaperPanel'
+import { MarkerHeading } from '@/components/paper/MarkerHeading'
 import { cn } from '@/lib/cn'
 
 type Color =
@@ -35,15 +36,14 @@ const palette: Record<Color, string> = {
 
 export function ColorRender({ headline, body, color = 'bolt', align = 'left' }: ColorProps) {
   return (
-    <BrutalBlock
-      className={cn(
-        'shadow-[8px_8px_0_var(--color-ink)] py-16',
-        palette[color ?? 'bolt'],
-        align === 'center' && 'text-center',
-      )}
+    <PaperPanel
+      jitter={1}
+      className={cn('py-16', palette[color ?? 'bolt'], align === 'center' && 'text-center')}
     >
-      <h2 className="text-4xl md:text-6xl font-black">{headline}</h2>
+      <MarkerHeading level={2} className="text-4xl md:text-6xl">
+        {headline}
+      </MarkerHeading>
       {body && <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto">{body}</p>}
-    </BrutalBlock>
+    </PaperPanel>
   )
 }

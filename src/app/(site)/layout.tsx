@@ -1,5 +1,5 @@
 import './globals.css'
-import { Space_Grotesk, Inter } from 'next/font/google'
+import { Space_Grotesk, Inter, Permanent_Marker } from 'next/font/google'
 import type { Metadata } from 'next'
 import { StatusBar } from '@/components/site/StatusBar'
 import { SiteNav } from '@/components/site/SiteNav'
@@ -12,6 +12,11 @@ export const dynamic = 'force-dynamic'
 
 const display = Space_Grotesk({ subsets: ['latin'], variable: '--font-display' })
 const body = Inter({ subsets: ['latin'], variable: '--font-body' })
+const marker = Permanent_Marker({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-marker',
+})
 
 export const metadata: Metadata = {
   title: 'Great Plains Theatre Commons',
@@ -21,7 +26,7 @@ export const metadata: Metadata = {
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const site = await getSite()
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
+    <html lang="en" className={`${display.variable} ${body.variable} ${marker.variable}`}>
       <body>
         <StatusBar pills={site.statusPills} />
         <SiteNav logoText={site.logoText} links={site.navLinks} />

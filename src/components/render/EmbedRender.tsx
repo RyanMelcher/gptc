@@ -42,7 +42,7 @@ export function EmbedRender({ kind, url, aspect = '16x9', caption }: EmbedRender
     <figure className="max-w-5xl mx-auto space-y-3">
       <div
         className={cn(
-          'border-[3px] border-[var(--color-ink)] shadow-[8px_8px_0_var(--color-ink)] overflow-hidden bg-[var(--color-ink)]',
+          'border-[3px] border-[var(--color-ink)] shadow-brutal-lg overflow-hidden bg-[var(--color-ink)]',
           aspectClass[aspect ?? '16x9'],
         )}
       >

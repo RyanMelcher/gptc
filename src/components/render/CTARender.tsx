@@ -1,4 +1,4 @@
-import { Block as BrutalBlock } from '@/components/brutal/Block'
+import { PaperPanel } from '@/components/paper/PaperPanel'
 import { BrutalButton } from '@/components/brutal/BrutalButton'
 import { cn } from '@/lib/cn'
 
@@ -36,9 +36,9 @@ export type CTARenderProps = {
 
 export function CTARender({ headline, body, tone = 'magenta', cta }: CTARenderProps) {
   return (
-    <BrutalBlock
+    <PaperPanel
       className={cn(
-        'shadow-[8px_8px_0_var(--color-ink)] flex flex-col md:flex-row md:items-center md:justify-between gap-6',
+        'flex flex-col md:flex-row md:items-center md:justify-between gap-6',
         toneClass[tone ?? 'magenta'],
       )}
     >
@@ -49,6 +49,6 @@ export function CTARender({ headline, body, tone = 'magenta', cta }: CTARenderPr
       <a href={cta.href} className="shrink-0">
         <BrutalButton variant="ink">{cta.label}</BrutalButton>
       </a>
-    </BrutalBlock>
+    </PaperPanel>
   )
 }

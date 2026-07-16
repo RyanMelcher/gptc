@@ -19,7 +19,7 @@ export type TwoUpProps = {
 function Pane({ side }: { side: Side }) {
   const img = mediaUrl(side.image, 'card')
   const inner = (
-    <article className="border-[3px] border-[var(--color-ink)] bg-[var(--color-paper)] shadow-[4px_4px_0_var(--color-ink)] hover:-translate-y-1 transition-transform">
+    <article className="paper-texture border-[3px] border-[var(--color-ink)] bg-[var(--color-paper)] shadow-brutal hover:-translate-y-1 transition-transform">
       {img && (
         <div className="relative aspect-[16/10] border-b-[3px] border-[var(--color-ink)]">
           <Image src={img} alt={mediaAlt(side.image)} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />

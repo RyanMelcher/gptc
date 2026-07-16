@@ -16,10 +16,15 @@
 
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
+  --font-marker: 'Permanent Marker', var(--font-display);
 
   --shadow-brutal: 4px 4px 0 var(--color-ink);
   --shadow-brutal-lg: 8px 8px 0 var(--color-ink);
 
   --radius-brutal: 0px;
   --border-brutal: 3px;
+  --paper-grid-line: #cfe0ef;
+  --paper-grid-size: 24px;
+  --paper-red-margin: #f2a6b3;
+  --paper-grid-margin: 2.5rem;
 }

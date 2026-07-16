@@ -1,4 +1,5 @@
-import { Block as BrutalBlock } from '@/components/brutal/Block'
+import { PaperPanel } from '@/components/paper/PaperPanel'
+import { MarkerHeading } from '@/components/paper/MarkerHeading'
 import { BrutalButton } from '@/components/brutal/BrutalButton'
 import { cn } from '@/lib/cn'
 
@@ -37,15 +38,19 @@ const bgClass: Record<Bg, string> = {
 
 export function HeroRender({ eyebrow, headline, subhead, background = 'marigold', cta }: HeroProps) {
   return (
-    <BrutalBlock className={cn('shadow-[8px_8px_0_var(--color-ink)]', bgClass[background ?? 'marigold'])}>
-      {eyebrow && <p className="font-display uppercase tracking-widest text-sm">{eyebrow}</p>}
-      <h1 className="text-5xl md:text-7xl font-black leading-[0.95] mt-2">{headline}</h1>
+    <PaperPanel torn jitter={-1} className={cn(bgClass[background ?? 'marigold'])}>
+      {eyebrow && (
+        <p className="font-marker uppercase tracking-widest text-sm">{eyebrow}</p>
+      )}
+      <MarkerHeading level={1} className="text-5xl md:text-7xl mt-2">
+        {headline}
+      </MarkerHeading>
       {subhead && <p className="mt-4 text-lg md:text-xl max-w-2xl">{subhead}</p>}
       {cta?.label && cta?.href && (
         <a href={cta.href} className="inline-block mt-6">
           <BrutalButton variant="ink">{cta.label}</BrutalButton>
         </a>
       )}
-    </BrutalBlock>
+    </PaperPanel>
   )
 }

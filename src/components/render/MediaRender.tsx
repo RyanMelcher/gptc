@@ -22,7 +22,7 @@ export function MediaRender({ asset, caption, size = 'wide' }: MediaRenderProps)
 
   return (
     <figure className={cn(sizeClass[size ?? 'wide'], 'space-y-3')}>
-      <div className="border-[3px] border-[var(--color-ink)] shadow-[8px_8px_0_var(--color-ink)] overflow-hidden">
+      <div className="border-[3px] border-[var(--color-ink)] shadow-brutal-lg overflow-hidden">
         {isVideo ? (
           <video src={src} controls className="w-full" />
         ) : (
