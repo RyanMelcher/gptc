@@ -19,8 +19,26 @@ import { Homepage } from './globals/Homepage'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
+// Origins allowed for CORS + CSRF. Payload rejects mutating admin requests whose
+// Origin isn't listed here with "You are not allowed to do this action", so this
+// must cover every host the browser can actually be on. We derive it from
+// APP_DOMAIN (apex + www, which Traefik both serve) as well as the explicit
+// NEXT_PUBLIC_SERVER_URL, so a mis-set public URL alone can't break the admin.
+const publicURL = process.env.NEXT_PUBLIC_SERVER_URL?.trim() || ''
+const appDomain = process.env.APP_DOMAIN?.trim() || ''
+const allowedOrigins = [
+  ...new Set(
+    [
+      publicURL,
+      appDomain && `https://${appDomain}`,
+      appDomain && `https://www.${appDomain}`,
+    ].filter(Boolean) as string[],
+  ),
+]
+const serverURL = publicURL || (appDomain ? `https://${appDomain}` : undefined)
+
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL,
+  serverURL,
   admin: {
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },
@@ -37,6 +55,6 @@ export default buildConfig({
     pool: { connectionString: process.env.DATABASE_URI || '' },
   }),
   sharp,
-  cors: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
-  csrf: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
+  cors: allowedOrigins,
+  csrf: allowedOrigins,
 })
