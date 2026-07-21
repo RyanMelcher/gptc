@@ -14,6 +14,7 @@ export type TwoUpProps = {
   headline?: string | null
   left: Side
   right: Side
+  color?: string | null
 }
 
 function Pane({ side }: { side: Side }) {
@@ -34,9 +35,12 @@ function Pane({ side }: { side: Side }) {
   return side.href ? <Link href={side.href}>{inner}</Link> : inner
 }
 
-export function TwoUpRender({ headline, left, right }: TwoUpProps) {
+export function TwoUpRender({ headline, left, right, color }: TwoUpProps) {
+  const tint = color
+    ? { background: `var(--color-${color})`, color: `var(--on-${color})` }
+    : undefined
   return (
-    <section className="space-y-6">
+    <section className={color ? 'space-y-6 py-10' : 'space-y-6'} style={tint}>
       {headline && <h2 className="font-display text-3xl md:text-5xl font-black">{headline}</h2>}
       <div className="grid gap-6 md:grid-cols-2">
         <Pane side={left} />

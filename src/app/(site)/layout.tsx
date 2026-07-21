@@ -5,6 +5,7 @@ import { StatusBar } from '@/components/site/StatusBar'
 import { SiteNav } from '@/components/site/SiteNav'
 import { SiteFooter } from '@/components/site/SiteFooter'
 import { getSite } from '@/lib/site'
+import { ThemeStyle } from '@/components/site/ThemeStyle'
 
 // CMS content renders at request time; the build has no database (migrations run
 // on container start), so nothing under (site) may be prerendered at build.
@@ -27,6 +28,9 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   const site = await getSite()
   return (
     <html lang="en" className={`${display.variable} ${body.variable} ${marker.variable}`}>
+      <head>
+        <ThemeStyle />
+      </head>
       <body>
         <StatusBar pills={site.statusPills} />
         <SiteNav logoText={site.logoText} links={site.navLinks} />

@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { colorField } from '../fields/colorField'
 
 export const MediaBlock: Block = {
   slug: 'media',
@@ -16,5 +17,6 @@ export const MediaBlock: Block = {
         { label: 'Full Bleed', value: 'full' },
       ],
     },
+    colorField('color', { admin: { description: 'Optional caption/background tint.' } }),
   ],
 }

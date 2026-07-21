@@ -104,10 +104,12 @@ export interface Config {
   globals: {
     site: Site;
     homepage: Homepage;
+    theme: Theme;
   };
   globalsSelect: {
     site: SiteSelect<false> | SiteSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
+    theme: ThemeSelect<false> | ThemeSelect<true>;
   };
   locale: null;
   widgets: {
@@ -250,9 +252,7 @@ export interface Page {
         | {
             headline: string;
             body?: string | null;
-            color?:
-              | ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink' | 'sage' | 'mint' | 'sky' | 'periwinkle' | 'butter')
-              | null;
+            color?: string | null;
             align?: ('left' | 'center') | null;
             id?: string | null;
             blockName?: string | null;
@@ -274,6 +274,10 @@ export interface Page {
               };
               [k: string]: unknown;
             };
+            /**
+             * Optional background tint for this section.
+             */
+            color?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'richText';
@@ -292,6 +296,10 @@ export interface Page {
               image?: (number | null) | Media;
               href?: string | null;
             };
+            /**
+             * Optional background tint.
+             */
+            color?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'twoUp';
@@ -300,6 +308,10 @@ export interface Page {
             asset: number | Media;
             caption?: string | null;
             size?: ('inset' | 'wide' | 'full') | null;
+            /**
+             * Optional caption/background tint.
+             */
+            color?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'media';
@@ -340,6 +352,62 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'embed';
+          }
+        | {
+            image: number | Media;
+            content: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            imageSide?: ('left' | 'right') | null;
+            imageWidth?: ('third' | 'half') | null;
+            /**
+             * Optional background tint.
+             */
+            color?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'imageText';
+          }
+        | {
+            align?: ('left' | 'center') | null;
+            items?:
+              | {
+                  label: string;
+                  href: string;
+                  color?: string | null;
+                  style?: ('solid' | 'outline') | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'buttonGroup';
+          }
+        | {
+            layout?: ('grid' | 'masonry') | null;
+            columns?: ('2' | '3' | '4') | null;
+            items?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'gallery';
           }
       )[]
     | null;
@@ -514,9 +582,7 @@ export interface News {
         | {
             headline: string;
             body?: string | null;
-            color?:
-              | ('bolt' | 'leaf' | 'marigold' | 'magenta' | 'ink' | 'sage' | 'mint' | 'sky' | 'periwinkle' | 'butter')
-              | null;
+            color?: string | null;
             align?: ('left' | 'center') | null;
             id?: string | null;
             blockName?: string | null;
@@ -538,6 +604,10 @@ export interface News {
               };
               [k: string]: unknown;
             };
+            /**
+             * Optional background tint for this section.
+             */
+            color?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'richText';
@@ -556,6 +626,10 @@ export interface News {
               image?: (number | null) | Media;
               href?: string | null;
             };
+            /**
+             * Optional background tint.
+             */
+            color?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'twoUp';
@@ -564,6 +638,10 @@ export interface News {
             asset: number | Media;
             caption?: string | null;
             size?: ('inset' | 'wide' | 'full') | null;
+            /**
+             * Optional caption/background tint.
+             */
+            color?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'media';
@@ -855,6 +933,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               content?: T;
+              color?: T;
               id?: T;
               blockName?: T;
             };
@@ -878,6 +957,7 @@ export interface PagesSelect<T extends boolean = true> {
                     image?: T;
                     href?: T;
                   };
+              color?: T;
               id?: T;
               blockName?: T;
             };
@@ -887,6 +967,7 @@ export interface PagesSelect<T extends boolean = true> {
               asset?: T;
               caption?: T;
               size?: T;
+              color?: T;
               id?: T;
               blockName?: T;
             };
@@ -921,6 +1002,48 @@ export interface PagesSelect<T extends boolean = true> {
               url?: T;
               aspect?: T;
               caption?: T;
+              id?: T;
+              blockName?: T;
+            };
+        imageText?:
+          | T
+          | {
+              image?: T;
+              content?: T;
+              imageSide?: T;
+              imageWidth?: T;
+              color?: T;
+              id?: T;
+              blockName?: T;
+            };
+        buttonGroup?:
+          | T
+          | {
+              align?: T;
+              items?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    color?: T;
+                    style?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        gallery?:
+          | T
+          | {
+              layout?: T;
+              columns?: T;
+              items?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -1075,6 +1198,7 @@ export interface NewsSelect<T extends boolean = true> {
           | T
           | {
               content?: T;
+              color?: T;
               id?: T;
               blockName?: T;
             };
@@ -1098,6 +1222,7 @@ export interface NewsSelect<T extends boolean = true> {
                     image?: T;
                     href?: T;
                   };
+              color?: T;
               id?: T;
               blockName?: T;
             };
@@ -1107,6 +1232,7 @@ export interface NewsSelect<T extends boolean = true> {
               asset?: T;
               caption?: T;
               size?: T;
+              color?: T;
               id?: T;
               blockName?: T;
             };
@@ -1212,7 +1338,17 @@ export interface Site {
   navLinks?:
     | {
         label: string;
-        href: string;
+        /**
+         * Optional if this item only opens a dropdown.
+         */
+        href?: string | null;
+        children?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -1351,6 +1487,49 @@ export interface Homepage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "theme".
+ */
+export interface Theme {
+  id: number;
+  /**
+   * One row per built-in color token.
+   */
+  builtIns?:
+    | {
+        slug: string;
+        label: string;
+        /**
+         * e.g. #14a3a3
+         */
+        hex: string;
+        textOn: 'ink' | 'paper';
+        id?: string | null;
+      }[]
+    | null;
+  customColors?:
+    | {
+        label: string;
+        /**
+         * Auto-generated from label.
+         */
+        slug?: string | null;
+        /**
+         * e.g. #3355ff
+         */
+        hex: string;
+        textOn: 'ink' | 'paper';
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Hard drop-shadow on panels. Turn off for a flat look.
+   */
+  brutalShadow?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site_select".
  */
 export interface SiteSelect<T extends boolean = true> {
@@ -1360,6 +1539,13 @@ export interface SiteSelect<T extends boolean = true> {
     | {
         label?: T;
         href?: T;
+        children?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
         id?: T;
       };
   statusPills?:
@@ -1475,6 +1661,34 @@ export interface HomepageSelect<T extends boolean = true> {
               href?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "theme_select".
+ */
+export interface ThemeSelect<T extends boolean = true> {
+  builtIns?:
+    | T
+    | {
+        slug?: T;
+        label?: T;
+        hex?: T;
+        textOn?: T;
+        id?: T;
+      };
+  customColors?:
+    | T
+    | {
+        label?: T;
+        slug?: T;
+        hex?: T;
+        textOn?: T;
+        id?: T;
+      };
+  brutalShadow?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

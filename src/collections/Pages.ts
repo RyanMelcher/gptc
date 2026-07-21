@@ -8,6 +8,9 @@ import {
   CTABlock,
   QuoteBlock,
   EmbedBlock,
+  ImageTextBlock,
+  ButtonGroupBlock,
+  GalleryBlock,
 } from '../blocks'
 import { revalidate, pagesPaths } from '../lib/revalidate'
 
@@ -61,7 +64,19 @@ export const Pages: CollectionConfig = {
     {
       name: 'blocks',
       type: 'blocks',
-      blocks: [HeroBlock, ColorBlock, RichTextBlock, TwoUpBlock, MediaBlock, CTABlock, QuoteBlock, EmbedBlock],
+      blocks: [
+        HeroBlock,
+        ColorBlock,
+        RichTextBlock,
+        TwoUpBlock,
+        MediaBlock,
+        CTABlock,
+        QuoteBlock,
+        EmbedBlock,
+        ImageTextBlock,
+        ButtonGroupBlock,
+        GalleryBlock,
+      ],
     },
     {
       name: 'seo',

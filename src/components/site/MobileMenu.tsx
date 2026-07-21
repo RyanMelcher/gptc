@@ -3,8 +3,7 @@
 import { useEffect, useState, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
-
-type NavLink = { id?: string | null; label: string; href: string }
+import { NavLink } from './SiteNav'
 
 const emptySubscribe = () => () => {}
 
@@ -64,13 +63,33 @@ export function MobileMenu({ links }: { links?: NavLink[] | null }) {
             <ul className="flex-1 overflow-y-auto flex flex-col font-display uppercase text-lg tracking-widest">
               {links?.map((l, i) => (
                 <li key={l.id ?? i} className="border-b-[3px] border-[var(--color-ink)]">
-                  <Link
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="block px-6 py-5"
-                  >
-                    {l.label}
-                  </Link>
+                  {l.children?.length ? (
+                    <details>
+                      <summary className="px-6 py-5 cursor-pointer list-none flex items-center justify-between">
+                        {l.href ? (
+                          <Link href={l.href} onClick={() => setOpen(false)}>
+                            {l.label}
+                          </Link>
+                        ) : (
+                          <span>{l.label}</span>
+                        )}
+                        <span aria-hidden>▾</span>
+                      </summary>
+                      <ul>
+                        {l.children.map((c, j) => (
+                          <li key={c.id ?? j} className="border-t-[3px] border-[var(--color-ink)]">
+                            <Link href={c.href} onClick={() => setOpen(false)} className="block px-10 py-4 text-base">
+                              {c.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  ) : (
+                    <Link href={l.href || '#'} onClick={() => setOpen(false)} className="block px-6 py-5">
+                      {l.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

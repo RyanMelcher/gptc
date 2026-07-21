@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { colorField } from '../fields/colorField'
 
 export const ColorBlock: Block = {
   slug: 'color',
@@ -6,23 +7,7 @@ export const ColorBlock: Block = {
   fields: [
     { name: 'headline', type: 'text', required: true },
     { name: 'body', type: 'textarea' },
-    {
-      name: 'color',
-      type: 'select',
-      defaultValue: 'bolt',
-      options: [
-        { label: 'Bolt (Teal)', value: 'bolt' },
-        { label: 'Leaf (Olive)', value: 'leaf' },
-        { label: 'Marigold', value: 'marigold' },
-        { label: 'Magenta', value: 'magenta' },
-        { label: 'Ink', value: 'ink' },
-        { label: 'Sage', value: 'sage' },
-        { label: 'Mint', value: 'mint' },
-        { label: 'Sky', value: 'sky' },
-        { label: 'Periwinkle', value: 'periwinkle' },
-        { label: 'Butter', value: 'butter' },
-      ],
-    },
+    colorField('color', { defaultValue: 'bolt' }),
     {
       name: 'align',
       type: 'select',

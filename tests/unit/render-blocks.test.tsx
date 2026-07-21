@@ -36,7 +36,8 @@ describe('ColorRender (backward compatible)', () => {
     expect(getByRole('heading', { level: 2 }).textContent).toBe('Sips & Snacks')
     expect(getByText('Provided').textContent).toBe('Provided')
     const section = container.querySelector('section')!
-    expect(section.className).toContain('bg-[var(--color-magenta)]')
+    expect(section.style.background).toContain('--color-magenta')
+    expect(section.style.color).toContain('--on-magenta')
     expect(section.className).toContain('text-center')
   })
 })
