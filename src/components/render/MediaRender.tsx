@@ -7,6 +7,7 @@ export type MediaRenderProps = {
   asset: Media | string | number
   caption?: string | null
   size?: 'inset' | 'wide' | 'full' | null
+  color?: string | null
 }
 
 const sizeClass: Record<'inset' | 'wide' | 'full', string> = {
@@ -15,12 +16,15 @@ const sizeClass: Record<'inset' | 'wide' | 'full', string> = {
   full: 'w-full',
 }
 
-export function MediaRender({ asset, caption, size = 'wide' }: MediaRenderProps) {
+export function MediaRender({ asset, caption, size = 'wide', color }: MediaRenderProps) {
   const src = mediaUrl(asset, size === 'full' ? 'hero' : 'card')
   if (!src) return null
   const isVideo = typeof asset === 'object' && asset.mimeType?.startsWith('video/')
+  const tint = color
+    ? { background: `var(--color-${color})`, color: `var(--on-${color})` }
+    : undefined
 
-  return (
+  const figure = (
     <figure className={cn(sizeClass[size ?? 'wide'], 'space-y-3')}>
       <div className="border-[3px] border-[var(--color-ink)] shadow-brutal-lg overflow-hidden">
         {isVideo ? (
@@ -37,5 +41,13 @@ export function MediaRender({ asset, caption, size = 'wide' }: MediaRenderProps)
         </figcaption>
       )}
     </figure>
+  )
+
+  if (!color) return figure
+
+  return (
+    <div className="py-10" style={tint}>
+      {figure}
+    </div>
   )
 }

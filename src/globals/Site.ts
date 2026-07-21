@@ -25,7 +25,20 @@ export const Site: GlobalConfig = {
               labels: { singular: 'Link', plural: 'Links' },
               fields: [
                 { name: 'label', type: 'text', required: true },
-                { name: 'href', type: 'text', required: true },
+                {
+                  name: 'href',
+                  type: 'text',
+                  admin: { description: 'Optional if this item only opens a dropdown.' },
+                },
+                {
+                  name: 'children',
+                  type: 'array',
+                  labels: { singular: 'Sub-link', plural: 'Sub-links' },
+                  fields: [
+                    { name: 'label', type: 'text', required: true },
+                    { name: 'href', type: 'text', required: true },
+                  ],
+                },
               ],
             },
             {

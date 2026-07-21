@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { colorField } from '../fields/colorField'
 
 export const TwoUpBlock: Block = {
   slug: 'twoUp',
@@ -25,5 +26,6 @@ export const TwoUpBlock: Block = {
         { name: 'href', type: 'text' },
       ],
     },
+    colorField('color', { admin: { description: 'Optional background tint.' } }),
   ],
 }
