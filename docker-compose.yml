@@ -1,3 +1,8 @@
+# Pin the project name so volumes are always <name>_pgdata / <name>_media,
+# independent of the folder name. Renaming/re-cloning the deploy folder can no
+# longer fork the database into a fresh empty volume.
+name: gtcp
+
 services:
   app:
     image: ${APP_IMAGE:?set APP_IMAGE in .env, e.g. ghcr.io/<owner>/gptc:latest}
